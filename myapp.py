@@ -4,7 +4,6 @@ from flask import Flask, jsonify, render_template, url_for, abort
 from dotenv import load_dotenv
 import contentful
 
-
 def create_contentful(SPACE_ID, DELIVERY_API_KEY):
     """Connect to contentful"""
     CLIENT = contentful.Client(
@@ -32,11 +31,11 @@ def create_app(SPACE_ID, DELIVERY_API_KEY):
 
     return app
 
+load_dotenv()
+
+SPACE_ID = os.getenv('SPACE_ID')
+DELIVERY_API_KEY = os.getenv('DELIVERY_API_KEY')
+app = create_app(SPACE_ID, DELIVERY_API_KEY)
+
 if __name__ == '__main__':
-    load_dotenv()
-
-    SPACE_ID = os.getenv('SPACE_ID')
-    DELIVERY_API_KEY = os.getenv('DELIVERY_API_KEY')
-
-    app = create_app(SPACE_ID, DELIVERY_API_KEY)
     app.run(port=5000)
