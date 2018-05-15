@@ -50,10 +50,19 @@ jobs:
           path: test-reports
           destination: test-reports
 
-  deploy-job:
+      - deploy:
+          requires:
+            - build
+
+deploy:
+    machine:
+        enabled: true
+    environment:
+      HEROKU_APP: "migration-env-demo"
     steps:
       - checkout
       - run:
           name: Deploy Master to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/migration-env-demo.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+
