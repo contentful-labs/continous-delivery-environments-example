@@ -49,8 +49,11 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
-  deployment:
-    staging:
-      branch: master
-      heroku:
-        appname: migration-env-demo
+
+  deploy-job:
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/migration-env-demo.git master
