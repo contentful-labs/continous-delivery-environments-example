@@ -69,7 +69,7 @@ workflows:
       - build
       - deploy:
           requires:
-            - build-job
+            - build
           filters:
             branches:
               only: master
