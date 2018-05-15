@@ -18,6 +18,14 @@ class TestApp:
         assert post.slug == 'hawkeye'
         assert post.gif is not None
 
+
+    def test_contentful_version(self, contentful_client):
+        '''Check content model version'''
+        version = contentful_client.entry('18iKSQj9YUo6iGc42A6kSS')
+        print(version.version)
+        assert version.version == '0.0.1'
+
+
     def test_content_type_post(self, contentful_client):
         '''Test content model of a post'''
         post_content_type = contentful_client.content_type('post')

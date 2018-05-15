@@ -4,18 +4,19 @@ from flask import Flask, jsonify, render_template, url_for, abort
 from dotenv import load_dotenv
 import contentful
 
-def create_contentful(SPACE_ID, DELIVERY_API_KEY):
+def create_contentful(SPACE_ID, DELIVERY_API_KEY, environment_id='master'):
     """Connect to contentful"""
     CLIENT = contentful.Client(
         SPACE_ID,
-        DELIVERY_API_KEY)
+        DELIVERY_API_KEY,
+        environment=environment_id)
 
     return CLIENT
 
 
-def create_app(SPACE_ID, DELIVERY_API_KEY):
+def create_app(SPACE_ID, DELIVERY_API_KEY, environment_id='master'):
     """Create flask app"""
-    client = create_contentful(SPACE_ID, DELIVERY_API_KEY)
+    client = create_contentful(SPACE_ID, DELIVERY_API_KEY, environment_id)
     app = Flask(__name__)
 
     @app.route('/')
