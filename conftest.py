@@ -13,23 +13,27 @@ load_dotenv()
 SPACE_ID = os.getenv('SPACE_ID')
 DELIVERY_API_KEY = os.getenv('DELIVERY_API_KEY')
 MANGEMENT_API_KEY = os.getenv('MANGEMENT_API_KEY')
+TESTING_ENV = 'circle_testing'
 
 client = contentful_management.Client(MANGEMENT_API_KEY)
 
 try:
-    environment = client.environments(SPACE_ID).find('circle_testing')
+    environment = client.environments(SPACE_ID).find(TESTING_ENV)
+    print("Deleting previous environment {}".format(TESTING_ENV))
     environment.delete()
 except:
-    print("circle_testing environment doesn't exist")
+    print("{} environment doesn't exist".format(TESTING_ENV))
 
+print("Creating new Enivronment: {}".format(TESTING_ENV))
 environment = client.environments(SPACE_ID).create(
-    'circle_testing',
+    TESTING_ENV,
     {
-        'name': 'circle_testing'
+        'name': TESTING_ENV
     }
 )
 
-environment.name = 'circle_testing'
+environment.name = TESTING_ENV
+print("Sleeping to allow creation of {}".format(TESTING_ENV))
 time.sleep(5)
 
 
