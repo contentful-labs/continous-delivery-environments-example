@@ -5,13 +5,8 @@ from dotenv import load_dotenv
 import contentful
 
 
-def create_contentful():
+def create_contentful(SPACE_ID, DELIVERY_API_KEY):
     """Connect to contentful"""
-    load_dotenv()
-
-    SPACE_ID = os.getenv('SPACE_ID')
-    DELIVERY_API_KEY = os.getenv('DELIVERY_API_KEY')
-
     CLIENT = contentful.Client(
         SPACE_ID,
         DELIVERY_API_KEY)
@@ -19,9 +14,9 @@ def create_contentful():
     return CLIENT
 
 
-def create_app():
+def create_app(SPACE_ID, DELIVERY_API_KEY):
     """Create flask app"""
-    client = create_contentful()
+    client = create_contentful(SPACE_ID, DELIVERY_API_KEY)
     app = Flask(__name__)
 
     @app.route('/')
@@ -38,5 +33,10 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    app = create_app()
+    load_dotenv()
+
+    SPACE_ID = os.getenv('SPACE_ID')
+    DELIVERY_API_KEY = os.getenv('DELIVERY_API_KEY')
+
+    app = create_app(SPACE_ID, DELIVERY_API_KEY)
     app.run(port=5000)
