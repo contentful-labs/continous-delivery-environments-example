@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  {% for hero in heroes %}
+  <div class="row">
+    <h1>{{ hero.title }}</h1>
+  </div>
+  <div class="row">
+    <img src="https://{{ hero.gif.url(w=400) }}" class="img-fluid" alt="Responsive image">
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
