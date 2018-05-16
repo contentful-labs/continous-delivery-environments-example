@@ -41,6 +41,13 @@ jobs:
 
       # run tests!
       - run:
+          name: Prepare Testing ENV
+          command: |
+            . venv/bin/activate
+            python migration_prep.py
+
+      # run tests!
+      - run:
           name: run tests
           command: |
             . venv/bin/activate
