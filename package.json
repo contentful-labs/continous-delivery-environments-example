@@ -1,0 +1,19 @@
+{
+  "name": "migration-env-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "myapp.py",
+  "scripts": {
+    "test": "pytest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shy/migration-env-demo.git"
+  },
+  "author": "Shy Ruparel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shy/migration-env-demo/issues"
+  },
+  "homepage": "https://github.com/Shy/migration-env-demo#readme"
+}
