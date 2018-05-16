@@ -90,10 +90,10 @@ jobs:
             key: v1-dependencies-{{ checksum "requirements.txt" }}-{{ checksum "package.json" }}
 
         - run:
-          name: Updating Master Environment
-          command: |
-          echo 'updating master environment'
-          node node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID  migration-tests/configure_tests.js --yes
+            name: Updating Master Environment
+            command: |
+              echo 'updating master environment'
+              node node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID  migration-tests/configure_tests.js --yes
 
         - run:
             name: Deploy Master to Heroku
