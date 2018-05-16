@@ -33,7 +33,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            npm install -g contentful-migration
+            npm install contentful-migration
 
       - save_cache:
           paths:
@@ -45,7 +45,7 @@ jobs:
           command: |
             . venv/bin/activate
             python migration_prep.py
-            contentful-migration --space-id $SPACE_ID --environment-id $ENVIRONMENT_ID_TESTING migration-tests/configure_tests.js --yes
+            node contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id $ENVIRONMENT_ID_TESTING migration-tests/configure_tests.js --yes
 
       # run tests!
       - run:
