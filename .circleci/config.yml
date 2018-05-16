@@ -33,7 +33,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            npm install -g contentful-migration
+            npm install contentful-migration
 
       - save_cache:
           paths:
