@@ -33,18 +33,19 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
+            npm install -g contentful-migration
 
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      # run tests!
       - run:
-          name: Prepare Testing ENV
+          name: Preparing environment for testing
           command: |
             . venv/bin/activate
             python migration_prep.py
+            contentful-migration --space-id o1enbvcutykv --environment-id circle_testing migration-tests/configure_tests.js --yes
 
       # run tests!
       - run:
