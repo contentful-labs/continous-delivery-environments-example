@@ -1,7 +1,7 @@
 // Basic example: update existing content type
 module.exports = function (migration) {
     const expected_version = '0.0.2'
-    const upgrade_version = '0.0.2'
+    const upgrade_version = '0.0.3'
 
 
     //Checks if this code base is able to work with this content schema version. If not the migration CLI will cause the build to fail.
@@ -27,9 +27,9 @@ module.exports = function (migration) {
         // Runs migration
         const post = migration.editContentType('post');
 
-        post.createField('first_appearance')
+        post.createField('last_appearance')
             .type('Symbol')
-            .name('First Appearance of the character')
+            .name('Last Appearance of the character')
             .required(false);
     }
 }
