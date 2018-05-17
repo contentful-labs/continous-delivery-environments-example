@@ -23,7 +23,7 @@ class TestApp:
         '''Check content model version'''
         version = contentful_client.entry('18iKSQj9YUo6iGc42A6kSS')
         print(version.version)
-        assert version.version == '0.0.2'
+        assert version.version == '0.0.3'
 
 
     def test_content_type_post(self, contentful_client):
