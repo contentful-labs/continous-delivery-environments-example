@@ -16,6 +16,7 @@ class TestApp:
         post = contentful_client.entry('2SiSYthyVaasy84IssCQAw')
         assert post.title == 'Hawkeye'
         assert post.slug == 'hawkeye'
+        assert post.first_appearance == 'Tales of Suspense #57 (Sept. 1964)'
         assert post.gif is not None
 
 
@@ -23,13 +24,13 @@ class TestApp:
         '''Check content model version'''
         version = contentful_client.entry('18iKSQj9YUo6iGc42A6kSS')
         print(version.version)
-        assert version.version == '0.0.3'
+        assert version.version == '0.0.4'
 
 
     def test_content_type_post(self, contentful_client):
         '''Test content model of a post'''
         post_content_type = contentful_client.content_type('post')
-        assert len(post_content_type.fields) == 5
+        assert len(post_content_type.fields) == 4
 
         title = next(d for d in post_content_type.fields if d.id == 'title')
         assert title.id == "title"
@@ -41,10 +42,6 @@ class TestApp:
 
         first_appearance = next(d for d in post_content_type.fields if d.id == 'first_appearance')
         assert first_appearance.id == "first_appearance"
-        assert slug.type == "Symbol"
-
-        last_appearance = next(d for d in post_content_type.fields if d.id == 'last_appearance')
-        assert last_appearance.id == "last_appearance"
         assert slug.type == "Symbol"
 
         gif = next(d for d in post_content_type.fields if d.id == 'gif')
