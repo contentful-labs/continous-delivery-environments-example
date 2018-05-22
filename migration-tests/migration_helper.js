@@ -13,7 +13,6 @@ module.exports = function (migration) {
         transformEntryForLocale: function (fromFields, currentLocale) {
             if (fromFields.version[currentLocale] == expectedVersion){
                 return { version: upgradeVersion };
-
             }else{
                 return { version: "Triggering Migration unsuccessful" };
             }
