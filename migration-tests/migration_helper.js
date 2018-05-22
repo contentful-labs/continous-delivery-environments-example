@@ -1,9 +1,7 @@
-
-
 module.exports = function (migration) {
     var parsedJSON = require('./version.json');
-    const expectedVersion = parsedJSON.expected_version;
-    const upgradeVersion = parsedJSON.upgrade_version;
+    const expectedVersion = parsedJSON.expectedVersion;
+    const upgradeVersion = parsedJSON.upgradeVersion;
 
     //Checks if this code base is able to work with this content schema version. If not the migration CLI will cause the build to fail.
     migration.transformEntries({

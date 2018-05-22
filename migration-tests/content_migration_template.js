@@ -1,6 +1,5 @@
-const migration_expected_version = <expected content version>;
-const migration_upgrade_version = <expected upgrade version>;
-
+const migrationExpectedVersion = <expected content version>;
+const migrationUpgradeVersion = <expected upgrade version>;
 
 
 function runMigration(migration){
@@ -8,11 +7,10 @@ function runMigration(migration){
 }
 
 
-
-function validateVersion(expected_version,upgrade_version){
+function validateVersion(expectedVersion,upgradeVersion){
         //Validates that this migration file should be run.
-        if (upgrade_version == migration_upgrade_version){
-            if (expected_version == migration_expected_version){
+        if (upgradeVersion == migrationUpgradeVersion){
+            if (expectedVersion == migrationExpectedVersion){
                 return true;
             }
         }
