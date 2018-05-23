@@ -46,7 +46,7 @@ jobs:
           command: |
             . venv/bin/activate
             python migration_prep.py
-            node node_modules/contentful-cli/bin/contentful.js --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id $ENVIRONMENT_ID_TESTING migration-tests/migration_helper.js --yes
+            node node_modules/contentful-cli/bin/contentful.js space migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id $ENVIRONMENT_ID_TESTING migration-tests/migration_helper.js --yes
 
       # run tests!
       - run:
@@ -88,7 +88,7 @@ jobs:
         - run:
             name: Updating Master Environment
             command: |
-              node node_modules/contentful-cli/bin/contentful.js --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id master migration-tests/migration_helper.js --yes
+              node node_modules/contentful-cli/bin/contentful.js space migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id master migration-tests/migration_helper.js --yes
 
         - run:
             name: Deploy Master to Heroku
