@@ -7,49 +7,51 @@ from flask import url_for
 class TestApp:
 
     def test_ping(self, client):
-        '''Test server responds'''
-        res = client.get(url_for('ping'))
+        """Test server responds"""
+        res = client.get(url_for("ping"))
         assert res.status_code == 200
-        assert res.json == {'ping': 'pong'}
+        assert res.json == {"ping": "pong"}
 
     def test_hawkeye_contentful(self, contentful_client):
-        '''Test Hawkeye is a charcter in the content'''
-        post = contentful_client.entry('2SiSYthyVaasy84IssCQAw')
-        assert post.title == 'Hawkeye'
-        assert post.slug == 'hawkeye'
-        assert post.first_appearance == 'Tales of Suspense #57 (Sept. 1964)'
+        """Test Hawkeye is a charcter in the content"""
+        post = contentful_client.entry("2SiSYthyVaasy84IssCQAw")
+        assert post.title == "Hawkeye"
+        assert post.slug == "hawkeye"
+        assert post.first_appearance == "Tales of Suspense #57 (Sept. 1964)"
         assert post.gif is not None
 
     def test_contentful_version(self, contentful_client):
-        '''Check content model version against upgrade version in JSon File'''
-        with open('migration-tests/version.json') as f:
+        """Check content model version against upgrade version in JSon File"""
+        with open("migration-tests/version.json") as f:
             data = json.load(f)
-        version = contentful_client.entry('18iKSQj9YUo6iGc42A6kSS')
+        version = contentful_client.entry("18iKSQj9YUo6iGc42A6kSS")
         print(version.version)
-        assert version.version == data['upgradeVersion']
+        assert version.version == data["upgradeVersion"]
 
     def test_content_type_post(self, contentful_client):
-        '''Test content model of a post'''
-        post_content_type = contentful_client.content_type('post')
+        """Test content model of a post"""
+        post_content_type = contentful_client.content_type("post")
         assert len(post_content_type.fields) == 4
 
-        title = next(d for d in post_content_type.fields if d.id == 'title')
+        title = next(d for d in post_content_type.fields if d.id == "title")
         assert title.id == "title"
         assert title.type == "Symbol"
 
-        slug = next(d for d in post_content_type.fields if d.id == 'slug')
+        slug = next(d for d in post_content_type.fields if d.id == "slug")
         assert slug.id == "slug"
         assert slug.type == "Symbol"
 
-        first_appearance = next(d for d in post_content_type.fields if d.id == 'first_appearance')
+        first_appearance = next(
+            d for d in post_content_type.fields if d.id == "first_appearance"
+        )
         assert first_appearance.id == "first_appearance"
         assert slug.type == "Symbol"
 
-        gif = next(d for d in post_content_type.fields if d.id == 'gif')
+        gif = next(d for d in post_content_type.fields if d.id == "gif")
         assert gif.id == "gif"
         assert gif.type == "Link"
 
     def test_hawkeye_get(self, client):
-        '''Test Hawkeye is listed as a charcter on the index route'''
-        res = client.get(url_for('index'))
-        assert b'Hawkeye' in res.data
+        """Test Hawkeye is listed as a charcter on the index route"""
+        res = client.get(url_for("index"))
+        assert b"Hawkeye" in res.data

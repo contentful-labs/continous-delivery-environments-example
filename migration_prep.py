@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SPACE_ID = os.getenv('SPACE_ID')
-DELIVERY_API_KEY = os.getenv('DELIVERY_API_KEY')
-MANGEMENT_API_KEY = os.getenv('MANGEMENT_API_KEY')
-TESTING_ENV = 'circle_testing'
+SPACE_ID = os.getenv("SPACE_ID")
+DELIVERY_API_KEY = os.getenv("DELIVERY_API_KEY")
+MANGEMENT_API_KEY = os.getenv("MANGEMENT_API_KEY")
+TESTING_ENV = "circle_testing"
 
 client = contentful_management.Client(MANGEMENT_API_KEY)
 
@@ -20,12 +20,7 @@ except:
     print("{} environment doesn't exist".format(TESTING_ENV))
 
 print("Creating new Enivronment: {}".format(TESTING_ENV))
-environment = client.environments(SPACE_ID).create(
-    TESTING_ENV,
-    {
-        'name': TESTING_ENV
-    }
-)
+environment = client.environments(SPACE_ID).create(TESTING_ENV, {"name": TESTING_ENV})
 time.sleep(1)
 
 environment.name = TESTING_ENV
@@ -40,4 +35,3 @@ while True:
         time.sleep(1)
 
 print("Complete")
-
