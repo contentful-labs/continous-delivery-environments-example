@@ -54,7 +54,7 @@ class TestApp:
         author = next(
             d for d in post_content_type.fields if d.id == "author"
         )
-        assert first_appearance.id == "author"
+        assert author.id == "author"
         assert slug.type == "Symbol"
 
     def test_hawkeye_get(self, client):
