@@ -1,4 +1,4 @@
-#Basic Tests for the application
+# Basic Tests for the application
 import pytest
 from flask import url_for
 
@@ -19,13 +19,11 @@ class TestApp:
         assert post.first_appearance == 'Tales of Suspense #57 (Sept. 1964)'
         assert post.gif is not None
 
-
     def test_contentful_version(self, contentful_client):
         '''Check content model version'''
         version = contentful_client.entry('18iKSQj9YUo6iGc42A6kSS')
         print(version.version)
         assert version.version == '0.0.6'
-
 
     def test_content_type_post(self, contentful_client):
         '''Test content model of a post'''
@@ -48,12 +46,7 @@ class TestApp:
         assert gif.id == "gif"
         assert gif.type == "Link"
 
-
     def test_hawkeye_get(self, client):
         '''Test Hawkeye is listed as a charcter on the index route'''
         res = client.get(url_for('index'))
         assert b'Hawkeye' in res.data
-
-
-
-
