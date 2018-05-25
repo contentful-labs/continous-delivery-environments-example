@@ -1,5 +1,6 @@
 # Basic Tests for the application
 import pytest
+import json
 from flask import url_for
 
 
@@ -20,10 +21,12 @@ class TestApp:
         assert post.gif is not None
 
     def test_contentful_version(self, contentful_client):
-        '''Check content model version'''
+        '''Check content model version against upgrade version in JSon File'''
+        with open('migration-tests/version.json') as f:
+            data = json.load(f)
         version = contentful_client.entry('18iKSQj9YUo6iGc42A6kSS')
         print(version.version)
-        assert version.version == '0.0.6'
+        assert version.version == data['upgradeVersion']
 
     def test_content_type_post(self, contentful_client):
         '''Test content model of a post'''
