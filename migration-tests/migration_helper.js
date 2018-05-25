@@ -20,7 +20,6 @@ module.exports = function (migration) {
     // Checks if we need to run any migration code:
     if (expectedVersion != upgradeVersion){
         migrationString = './content_migration_'+ upgradeVersion.split('.').join('_') + '.js';
-
         var migrationCode = require(migrationString);
 
         if (migrationCode.validateVersion(expectedVersion,upgradeVersion)){
