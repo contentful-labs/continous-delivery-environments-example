@@ -46,7 +46,7 @@ jobs:
           command: |
             . venv/bin/activate
             python migration_prep.py
-            node node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id $ENVIRONMENT_ID_TESTING migration-tests/migration_helper.js --yes
+            node node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id $CIRCLE_BRANCH-$ENVIRONMENT_ID_TESTING migration-tests/migration_helper.js --yes
 
       # run tests!
       - run:
