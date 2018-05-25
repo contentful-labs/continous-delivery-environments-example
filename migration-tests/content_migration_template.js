@@ -1,23 +1,20 @@
-const migrationExpectedVersion = <expected content version>;
-const migrationUpgradeVersion = <expected upgrade version>;
+const migrationExpectedVersion = "<expected content version>";
+const migrationUpgradeVersion = "<expected upgrade version>";
 
-
-function runMigration(migration){
-    // Insert migration code here
+function runMigration(migration) {
+    console.log("Insert migration code here");
 }
 
-
-function validateVersion(expectedVersion,upgradeVersion){
-        //Validates that this migration file should be run.
-        if (upgradeVersion == migrationUpgradeVersion){
-            if (expectedVersion == migrationExpectedVersion){
-                return true;
-            }
+function validateVersion(expected_version, upgrade_version) {
+    if (upgrade_version == migration_upgrade_version) {
+        if (expected_version == migration_expected_version) {
+            return true;
         }
-        return false;
-
+    }
+    return false;
 }
 
 module.exports = {
-    runMigration, validateVersion
-}
+    runMigration,
+    validateVersion
+};
