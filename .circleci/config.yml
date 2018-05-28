@@ -45,7 +45,7 @@ jobs:
           name: Preparing environment for testing
           command: |
             . venv/bin/activate
-            python migration_prep.py
+            python migration_prep.py $CIRCLE_BRANCH-$ENVIRONMENT_ID_TESTING
             node node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id $CIRCLE_BRANCH-$ENVIRONMENT_ID_TESTING migration-tests/migration_helper.js --yes
 
       # run tests!
@@ -53,7 +53,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest
+            pytest --name=$CIRCLE_BRANCH-$ENVIRONMENT_ID_TESTING
 
       - store_artifacts:
           path: test-reports
