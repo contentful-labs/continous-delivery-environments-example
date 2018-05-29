@@ -38,18 +38,15 @@ while True:
         time.sleep(1)
 
 print("Complete creation of new environment.")
-print("Updating API Key to allow access.")
 
-
-new_environment_link = Link({
-    "sys": {
-        "type": "Link",
-        "linkType": "Environment",
-        "id": TESTING_ENV
-    }
-})
+new_environment_link = Link(
+    {"sys": {"type": "Link", "linkType": "Environment", "id": TESTING_ENV}}
+)
 
 api_keys = client.api_keys(SPACE_ID).all()
+
+
 for api_key in api_keys:
     api_key.environments.append(new_environment_link)
+    print("Updating API Key - {} to allow access.".format(api_key.id))
     api_key.save()
