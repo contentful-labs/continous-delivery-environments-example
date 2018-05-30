@@ -1,4 +1,4 @@
-continous delivery environments example
+Continous Delivery Environments Example
 =====
 An example application for how you can integrating migrations in your continous delivery pipeline.
 
@@ -41,4 +41,4 @@ MANGEMENT_API_KEY=<MANGEMENT_API_KEY>
 License
 =======
 
-Copyright (c) 2017-2018 Contentful GmbH. Code released under the MIT license. See [LICENSE][LICENSE] for further details.
+Copyright (c) 2018 Contentful GmbH. Code released under the MIT license. See [LICENSE](LICENSE) for further details.
