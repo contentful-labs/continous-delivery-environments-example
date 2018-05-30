@@ -64,6 +64,7 @@ jobs:
       docker:
         - image: circleci/python:3.6.5-node-browsers
       environment:
+        # Update HEROKU_APP with your application Name.
         HEROKU_APP: "migration-env-demo"
       steps:
         - checkout
