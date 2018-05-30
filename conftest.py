@@ -10,13 +10,20 @@ SPACE_ID = os.getenv("SPACE_ID")
 DELIVERY_API_KEY = os.getenv("DELIVERY_API_KEY")
 TESTING_ENV = "circle_testing"
 
+
 def pytest_addoption(parser):
-    parser.addoption("--environment-id", action="store", default="circle_testing",
-        help="environment-id")
+    parser.addoption(
+        "--environment-id",
+        action="store",
+        default="circle_testing",
+        help="environment-id",
+    )
+
 
 @pytest.fixture
 def get_env_id(request):
     return request.config.getoption("--environment-id")
+
 
 @pytest.fixture
 def app(get_env_id):

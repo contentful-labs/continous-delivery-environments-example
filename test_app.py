@@ -51,9 +51,7 @@ class TestApp:
         assert gif.id == "gif"
         assert gif.type == "Link"
 
-        author = next(
-            d for d in post_content_type.fields if d.id == "author"
-        )
+        author = next(d for d in post_content_type.fields if d.id == "author")
         assert author.id == "author"
         assert slug.type == "Symbol"
 
