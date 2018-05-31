@@ -39,7 +39,7 @@ class TestApp:
 
         author = next(d for d in post_content_type.fields if d.id == "author")
         assert author.id == "author"
-        assert author.type == "author"
+        assert author.type == "Symbol"
 
         slug = next(d for d in post_content_type.fields if d.id == "slug")
         assert slug.id == "slug"
