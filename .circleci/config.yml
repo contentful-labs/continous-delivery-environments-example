@@ -46,7 +46,7 @@ jobs:
           command: |
             . venv/bin/activate
             python migration_prep.py "circletesting_$CIRCLE_BRANCH"
-            node_modules/contentful-cli/bin/contentful space migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id "circletesting_$CIRCLE_BRANCH" migration-tests/migration_helper.js --yes
+            node_modules/contentful-cli/bin/contentful.js space migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id "circletesting_$CIRCLE_BRANCH" migration-tests/migration_helper.js --yes
 
       # run tests!
       - run:
@@ -89,7 +89,7 @@ jobs:
         - run:
             name: Updating Master Environment
             command: |
-              node_modules/contentful-cli/bin/contentful space migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id master migration-tests/migration_helper.js --yes
+              node_modules/contentful-cli/bin/contentful.js space migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id master migration-tests/migration_helper.js --yes
 
         - run:
             name: Deploy Master to Heroku
