@@ -31,7 +31,7 @@ class TestApp:
     def test_content_type_post(self, contentful_client):
         """Test content model of a post"""
         post_content_type = contentful_client.content_type("post")
-        assert len(post_content_type.fields) == 5
+        assert len(post_content_type.fields) == 4
 
         title = next(d for d in post_content_type.fields if d.id == "title")
         assert title.id == "title"
@@ -50,10 +50,6 @@ class TestApp:
         gif = next(d for d in post_content_type.fields if d.id == "gif")
         assert gif.id == "gif"
         assert gif.type == "Link"
-
-        author = next(d for d in post_content_type.fields if d.id == "author")
-        assert author.id == "author"
-        assert slug.type == "Symbol"
 
     def test_hawkeye_get(self, client):
         """Test Hawkeye is listed as a charcter on the index route"""
