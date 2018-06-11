@@ -1,14 +1,9 @@
-
-const migration_expected_version = "0.0.8";
-const migration_upgrade_version = "0.0.9";
+const migration_expected_version = "0.0.9";
+const migration_upgrade_version = "0.0.10";
 
 function runMigration(migration) {
     const post = migration.editContentType("post");
-    post
-        .createField("author")
-        .name("author")
-        .type("Symbol")
-        .required(false);
+    post.deleteField("author");
     return;
 }
 
