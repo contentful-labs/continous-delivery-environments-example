@@ -7,15 +7,14 @@ function runMigration(migration) {
     .required(false);
   return;
 
-  migration.transformEntries({
-    contentType: "post",
-    from: ["author"],
-    to: ["author"],
-    transformEntryForLocale: function(fromFields, currentLocale) {
-      const newAuthor = "Stan Lee";
-      return { author: newAuthor };
-    }
-  });
+  // migration.transformEntries({
+  //   contentType: "post",
+  //   from: ["author"],
+  //   to: ["author"],
+  //   transformEntryForLocale: function(fromFields, currentLocale) {
+  //     return { author: "Stan Lee" };
+  //   }
+  // });
 }
 
 module.exports = {
