@@ -12,6 +12,7 @@ module.exports = function(migration) {
             if (fromFields.version[currentLocale] == expectedVersion) {
                 return { version: upgradeVersion };
             } else {
+                process.exit(1);
                 return { version: "Triggering Migration unsuccessful" };
             }
         }
@@ -23,13 +24,9 @@ module.exports = function(migration) {
             "./content_migration_" +
             upgradeVersion.split(".").join("_") +
             ".js";
-        var migrationCode = require(migrationString);
 
-        if (migrationCode.validateVersion(expectedVersion, upgradeVersion)) {
-            migrationCode.runMigration(migration);
-        } else {
-            console.log("Migration Version Mismatch");
-            process.exit(1);
-        }
+        var migrationCode = require(migrationString);
+        migrationCode.runMigration(migration);
+
     }
 };
