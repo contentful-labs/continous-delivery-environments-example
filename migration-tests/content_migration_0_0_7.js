@@ -9,9 +9,10 @@ function runMigration(migration) {
 
   migration.transformEntries({
     contentType: "post",
+    from: ["author"],
     to: ["author"],
     transformEntryForLocale: function(fromFields, currentLocale) {
-      return "Stan Lee";
+      return { author: "Stan Lee"};
     }
   });
 }
