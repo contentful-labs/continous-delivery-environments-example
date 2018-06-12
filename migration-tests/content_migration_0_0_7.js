@@ -12,7 +12,8 @@ function runMigration(migration) {
     from: ["author"],
     to: ["author"],
     transformEntryForLocale: function(fromFields, currentLocale) {
-      return { author: "Stan Lee"};
+      const newAuthor = "Stan Lee";
+      return { author: newAuthor };
     }
   });
 }
