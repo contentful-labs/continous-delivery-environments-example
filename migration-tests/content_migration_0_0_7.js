@@ -6,6 +6,14 @@ function runMigration(migration) {
     .type("Symbol")
     .required(false);
   return;
+
+  migration.transformEntries({
+    contentType: "post",
+    to: ["author"],
+    transformEntryForLocale: function(fromFields, currentLocale) {
+      return "Stan Lee";
+    }
+  });
 }
 
 module.exports = {
