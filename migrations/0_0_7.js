@@ -1,4 +1,4 @@
-function runMigration(migration) {
+module.exports = function runMigration(migration) {
   const post = migration.editContentType("post");
   post
     .createField("author")
@@ -6,9 +6,4 @@ function runMigration(migration) {
     .type("Symbol")
     .required(false);
   return;
-
-}
-
-module.exports = {
-  runMigration
 };

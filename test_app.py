@@ -20,14 +20,6 @@ class TestApp:
         assert post.first_appearance == "Tales of Suspense #57 (Sept. 1964)"
         assert post.gif is not None
 
-    def test_contentful_version(self, contentful_client):
-        """Check content model version against upgrade version in JSon File"""
-        with open("migration-tests/version.json") as f:
-            data = json.load(f)
-        version = contentful_client.entry("18iKSQj9YUo6iGc42A6kSS")
-        print(version.version)
-        assert version.version == data["upgradeVersion"]
-
     def test_content_type_post(self, contentful_client):
         """Test content model of a post"""
         post_content_type = contentful_client.content_type("post")

@@ -10,7 +10,7 @@ load_dotenv()
 
 SPACE_ID = os.getenv("SPACE_ID")
 DELIVERY_API_KEY = os.getenv("DELIVERY_API_KEY")
-MANGEMENT_API_KEY = os.getenv("MANGEMENT_API_KEY")
+MANGEMENT_API_KEY = os.getenv("MANAGEMENT_API_KEY")
 TESTING_ENV = sys.argv[1]
 
 client = contentful_management.Client(MANGEMENT_API_KEY)
