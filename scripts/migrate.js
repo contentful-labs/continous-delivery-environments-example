@@ -31,13 +31,13 @@
   console.log(`ENVIRONMENT_ID: ${ENVIRONMENT_ID}`);
 
   // ---------------------------------------------------------------------------
-  // 1. Read all the available migrations from the file system
+  console.log('Read all the available migrations from the file system');
   const availableMigrations = (await readdirAsync(MIGRATIONS_DIR))
     .filter(file => /^\d+?_\d+?_\d+?\.js$/.test(file))
     .map(file => getVersionOfFile(file));
 
   // ---------------------------------------------------------------------------
-  // 2. Figure out latest ran migration of the contentful space
+  console.log('Figure out latest ran migration of the contentful space');
   const {items: versions} = await environment.getEntries({
     content_type: 'versionTracking'
   });
@@ -52,7 +52,7 @@
   const currentVersionString = storedVersionEntry.fields.version[defaultLocale];
 
   // ---------------------------------------------------------------------------
-  // 3. Evaluate which migrations to run
+  console.log('Evaluate which migrations to run');
   const currentMigrationIndex = availableMigrations.indexOf(currentVersionString);
 
   if (currentMigrationIndex === -1) {
@@ -69,7 +69,7 @@
   };
 
   // ---------------------------------------------------------------------------
-  // 4. Run migrations and update version entry
+  console.log('Run migrations and update version entry');
   while(migrationToRun = migrationsToRun.shift()) {
     const filePath = path.join(__dirname, '..', 'migrations', getFileOfVersion(migrationToRun));
     console.log(`Running ${filePath}`);
