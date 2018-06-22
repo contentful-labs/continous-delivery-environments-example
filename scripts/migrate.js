@@ -3,6 +3,7 @@
 (async () => {
   const {promisify} = require('util');
   const {readdir} = require('fs');
+  const readdirAsync = promisify(readdir);
   const path = require('path');
   const { createClient } = require('contentful-management');
   const {default: runMigration} = require('contentful-migration/built/bin/cli');
@@ -15,7 +16,6 @@
   // Configuration variables
   //
   const [,, SPACE_ID, ENVIRONMENT_ID, CMA_ACCESS_TOKEN] = process.argv;
-  const LOCALE = 'en-US';
   const MIGRATIONS_DIR = path.join('.', 'migrations');
 
   const client = createClient({
@@ -23,7 +23,8 @@
   });
   const space = await client.getSpace(SPACE_ID);
   const environment = await space.getEnvironment(ENVIRONMENT_ID);
-  const readdirAsync = promisify(readdir);
+  const defaultLocale = (await environment.getLocales()).items
+    .find(locale => locale.default).code;
 
   console.log('Running with the following configuration');
   console.log(`SPACE_ID: ${SPACE_ID}`);
@@ -48,7 +49,7 @@
   }
 
   let storedVersionEntry = versions[0];
-  const currentVersionString = storedVersionEntry.fields.version[LOCALE];
+  const currentVersionString = storedVersionEntry.fields.version[defaultLocale];
 
   // ---------------------------------------------------------------------------
   // 3. Evaluate which migrations to run
@@ -77,7 +78,7 @@
     }));
     console.log(`${migrationToRun} succeeded`);
 
-    storedVersionEntry.fields.version[LOCALE] = migrationToRun;
+    storedVersionEntry.fields.version[defaultLocale] = migrationToRun;
     storedVersionEntry = await storedVersionEntry.update();
     storedVersionEntry = await storedVersionEntry.publish();
 

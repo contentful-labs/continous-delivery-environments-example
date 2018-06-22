@@ -22,7 +22,7 @@ try:
 except:
     print("{} environment doesn't exist".format(TESTING_ENV))
 
-print("Creating new Enivronment: {}".format(TESTING_ENV))
+print("Creating new Environment: {}".format(TESTING_ENV))
 environment = client.environments(SPACE_ID).create(TESTING_ENV, {"name": TESTING_ENV})
 time.sleep(3)
 

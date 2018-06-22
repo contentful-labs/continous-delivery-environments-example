@@ -6,6 +6,9 @@
   "scripts": {
     "test": "pytest"
   },
+  "engines" : {
+    "node" : ">=8"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:contentful-labs/continous-delivery-environments-example.git"
