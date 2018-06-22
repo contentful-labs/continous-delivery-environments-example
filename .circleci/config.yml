@@ -33,7 +33,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            npm install contentful-migration
+            npm install
 
       - save_cache:
           paths:
@@ -45,15 +45,15 @@ jobs:
           name: Preparing environment for testing
           command: |
             . venv/bin/activate
-            python migration_prep.py "circletesting_$CIRCLE_BRANCH"
-            node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id "circletesting_$CIRCLE_BRANCH" migration-tests/migration_helper.js --yes
+            python scripts/migration_prep.py "CI_$CIRCLE_BRANCH"
+            scripts/migrate.js $SPACE_ID "CI_$CIRCLE_BRANCH" $MANAGEMENT_API_KEY
 
       # run tests!
       - run:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest --environment-id="circletesting_$CIRCLE_BRANCH"
+            pytest --environment-id="CI_$CIRCLE_BRANCH"
 
       - store_artifacts:
           path: test-reports
@@ -79,7 +79,7 @@ jobs:
         - run:
             name: install dependencies
             command: |
-              npm install contentful-migration
+              npm install
 
         - save_cache:
             paths:
@@ -89,7 +89,7 @@ jobs:
         - run:
             name: Updating Master Environment
             command: |
-              node_modules/contentful-migration/bin/contentful-migration --access-token $MANGEMENT_API_KEY --space-id $SPACE_ID --environment-id master migration-tests/migration_helper.js --yes
+              scripts/migrate.js $SPACE_ID master $MANAGEMENT_API_KEY
 
         - run:
             name: Deploy Master to Heroku

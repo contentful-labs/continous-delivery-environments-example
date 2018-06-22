@@ -17,6 +17,8 @@ Getting started
 
 To use the continous delivery pipeline of this project you need accounts for the following services:
 
+- Python3
+- Node 8.0+
 - [Contentful](https://www.contentful.com)
 - [CircleCI](https://circleci.com/)
 - [Heroku](https://www.heroku.com/)
