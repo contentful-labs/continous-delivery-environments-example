@@ -10,7 +10,7 @@ load_dotenv()
 
 SPACE_ID = os.getenv("SPACE_ID")
 DELIVERY_API_KEY = os.getenv("DELIVERY_API_KEY")
-MANGEMENT_API_KEY = os.getenv("MANGEMENT_API_KEY")
+MANGEMENT_API_KEY = os.getenv("MANAGEMENT_API_KEY")
 TESTING_ENV = sys.argv[1]
 
 client = contentful_management.Client(MANGEMENT_API_KEY)
@@ -22,7 +22,7 @@ try:
 except:
     print("{} environment doesn't exist".format(TESTING_ENV))
 
-print("Creating new Enivronment: {}".format(TESTING_ENV))
+print("Creating new Environment: {}".format(TESTING_ENV))
 environment = client.environments(SPACE_ID).create(TESTING_ENV, {"name": TESTING_ENV})
 time.sleep(3)
 

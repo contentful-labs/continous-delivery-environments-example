@@ -1,4 +1,4 @@
-function runMigration(migration) {
+module.exports = function runMigration(migration) {
   const post = migration.editContentType("post");
   post
     .createField("last_appearance")
@@ -6,8 +6,4 @@ function runMigration(migration) {
     .type("Symbol")
     .required(false);
   return;
-}
-
-module.exports = {
-  runMigration
 };
