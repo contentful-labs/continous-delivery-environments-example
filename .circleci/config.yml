@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.5-node-browsers
+      - image: circleci/python:3.6.5-node
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -45,7 +45,6 @@ jobs:
           name: Preparing environment for testing
           command: |
             . venv/bin/activate
-            python scripts/migration_prep.py "CI_$CIRCLE_BRANCH"
             scripts/migrate.js $SPACE_ID "CI_$CIRCLE_BRANCH" $MANAGEMENT_API_KEY
 
       # run tests!
