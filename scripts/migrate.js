@@ -22,7 +22,6 @@
     accessToken: CMA_ACCESS_TOKEN
   });
   const space = await client.getSpace(SPACE_ID);
-  // const environment = await space.getEnvironment(ENVIRONMENT_ID);
 
   console.log('Running with the following configuration');
   console.log(`SPACE_ID: ${SPACE_ID}`);
@@ -37,11 +36,9 @@
       console.log("Environment not found");
     });
 
-
   // ---------------------------------------------------------------------------
   console.log(`Creating environment ${ENVIRONMENT_ID}`);
-  environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID })
-    .then(function(environment){return environment;})
+  await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID })
     .catch(console.error);
 
   // ---------------------------------------------------------------------------
@@ -67,10 +64,11 @@
 
   // ---------------------------------------------------------------------------
   console.log('Set default locale');
-
-  environment = await space.getEnvironment(ENVIRONMENT_ID);
-  console.log(environment)
-
+  const environment = await space.getEnvironment(ENVIRONMENT_ID)
+    .then((environment) => {
+      return environment;
+    })
+    .catch(console.error);
   const defaultLocale = (await environment.getLocales()).items
     .find(locale => locale.default).code;
 
