@@ -74,8 +74,10 @@
   // ---------------------------------------------------------------------------
   console.log('Read all the available migrations from the file system');
   const availableMigrations = (await readdirAsync(MIGRATIONS_DIR))
-    .filter(file => /^\d+?_\d+?_\d+?\.js$/.test(file))
+    .filter(file => /^\d+?\.js$/.test(file))
     .map(file => getVersionOfFile(file));
+
+  console.log(availableMigrations);
 
   // ---------------------------------------------------------------------------
   console.log('Figure out latest ran migration of the contentful space');
@@ -91,6 +93,7 @@
 
   let storedVersionEntry = versions[0];
   const currentVersionString = storedVersionEntry.fields.version[defaultLocale];
+  console.log(currentVersionString);
 
   // ---------------------------------------------------------------------------
   console.log('Evaluate which migrations to run');
