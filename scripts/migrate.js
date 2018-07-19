@@ -40,12 +40,9 @@
 
   // ---------------------------------------------------------------------------
   console.log(`Creating environment ${ENVIRONMENT_ID}`);
-  const environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID })
+  environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID })
     .then(function(environment){return environment;})
     .catch(console.error);
-
-  const defaultLocale = (await environment.getLocales()).items
-    .find(locale => locale.default).code;
 
   // ---------------------------------------------------------------------------
   console.log('Update API Key to allow access to new environment');
@@ -57,7 +54,7 @@
     }
    }
 
-  const ApiKeys = await space.getApiKeys()
+  await space.getApiKeys()
   .then(function(response){
     items = response.items
     for(item in response.items){
@@ -68,6 +65,11 @@
   })
   .catch(console.error);
 
+  // ---------------------------------------------------------------------------
+  console.log('Connect to environment');
+  environment = await space.getEnvironment(ENVIRONMENT_ID);
+  const defaultLocale = (await environment.getLocales()).items
+    .find(locale => locale.default).code;
 
   // ---------------------------------------------------------------------------
   console.log('Read all the available migrations from the file system');
