@@ -29,21 +29,25 @@
     console.log(`SPACE_ID: ${SPACE_ID}`);
     console.log(`ENVIRONMENT_ID: ${ENVIRONMENT_ID}`);
 
+
     // ---------------------------------------------------------------------------
     console.log(`Checking for existing versions of environment: ${ENVIRONMENT_ID}`);
 
     try {
       environment = await space.getEnvironment(ENVIRONMENT_ID);
-      await environment.delete();
-      console.log('Environment deleted');
+      if (ENVIRONMENT_ID != 'master'){
+        await environment.delete();
+        console.log('Environment deleted');
+      }
     } catch(e) {
       console.log('Environment not found');
     }
 
     // ---------------------------------------------------------------------------
-    console.log(`Creating environment ${ENVIRONMENT_ID}`);
-    environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID });
-
+    if (ENVIRONMENT_ID != 'master'){
+      console.log(`Creating environment ${ENVIRONMENT_ID}`);
+      environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID });
+    }
     // ---------------------------------------------------------------------------
     const DELAY = 3000;
     const MAX_NUMBER_OF_TRIES = 10;
