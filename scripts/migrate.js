@@ -67,8 +67,10 @@
 
   // ---------------------------------------------------------------------------
   console.log('Set default locale');
+
+  environment = await space.getEnvironment(ENVIRONMENT_ID);
   console.log(environment)
-  // environment = await space.getEnvironment(ENVIRONMENT_ID);
+
   const defaultLocale = (await environment.getLocales()).items
     .find(locale => locale.default).code;
 
