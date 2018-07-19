@@ -22,13 +22,51 @@
     accessToken: CMA_ACCESS_TOKEN
   });
   const space = await client.getSpace(SPACE_ID);
-  const environment = await space.getEnvironment(ENVIRONMENT_ID);
-  const defaultLocale = (await environment.getLocales()).items
-    .find(locale => locale.default).code;
+  // const environment = await space.getEnvironment(ENVIRONMENT_ID);
 
   console.log('Running with the following configuration');
   console.log(`SPACE_ID: ${SPACE_ID}`);
   console.log(`ENVIRONMENT_ID: ${ENVIRONMENT_ID}`);
+
+  // ---------------------------------------------------------------------------
+  console.log(`Checking for existing versions of environment: ${ENVIRONMENT_ID}`);
+  await space.getEnvironment(ENVIRONMENT_ID)
+    .then((environment) => environment.delete())
+    .then(() => console.log('Environment deleted'))
+    .catch(function(error) {
+      console.log("Environment not found");
+    });
+
+
+  // ---------------------------------------------------------------------------
+  console.log(`Creating environment ${ENVIRONMENT_ID}`);
+  const environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID })
+    .then(function(environment){return environment;})
+    .catch(console.error);
+
+  const defaultLocale = (await environment.getLocales()).items
+    .find(locale => locale.default).code;
+
+  // ---------------------------------------------------------------------------
+  console.log('Update API Key to allow access to new environment');
+  const newEnv = {
+    sys: {
+     type: 'Link',
+     linkType: 'Environment',
+     id:ENVIRONMENT_ID
+    }
+   }
+
+  const ApiKeys = await space.getApiKeys()
+  .then(function(response){
+    items = response.items
+    for(item in response.items){
+      response.items[item].environments.push(newEnv);
+      response.items[item].update();
+    }
+  })
+  .catch(console.error);
+
 
   // ---------------------------------------------------------------------------
   console.log('Read all the available migrations from the file system');
