@@ -61,9 +61,8 @@
   .then(function(response){
     items = response.items
     for(item in response.items){
-      console.log(response.items[item].environments);
+      console.log(`Updating - ${response.items[item].sys.id}`);
       response.items[item].environments.push(newEnv);
-      console.log(response.items[item].environments);
       response.items[item].update();
     }
   })
