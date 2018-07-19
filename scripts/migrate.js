@@ -23,52 +23,45 @@
   });
   const space = await client.getSpace(SPACE_ID);
 
+  let environment;
   console.log('Running with the following configuration');
   console.log(`SPACE_ID: ${SPACE_ID}`);
   console.log(`ENVIRONMENT_ID: ${ENVIRONMENT_ID}`);
 
   // ---------------------------------------------------------------------------
   console.log(`Checking for existing versions of environment: ${ENVIRONMENT_ID}`);
-  await space.getEnvironment(ENVIRONMENT_ID)
-    .then((environment) => environment.delete())
-    .then(() => console.log('Environment deleted'))
-    .catch(function(error) {
-      console.log("Environment not found");
-    });
+
+  try {
+    environment = await space.getEnvironment(ENVIRONMENT_ID);
+    await environment.delete();
+    console.log('Environment deleted');
+  } catch(e) {
+    console.log('Environment not found');
+  }
 
   // ---------------------------------------------------------------------------
   console.log(`Creating environment ${ENVIRONMENT_ID}`);
-  await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID })
-    .catch(console.error);
+  environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, { name: ENVIRONMENT_ID });
 
   // ---------------------------------------------------------------------------
-  console.log('Update API Key to allow access to new environment');
+  console.log('Update API Keys to allow access to new environment');
   const newEnv = {
     sys: {
-     type: 'Link',
-     linkType: 'Environment',
-     id:ENVIRONMENT_ID
+      type: 'Link',
+      linkType: 'Environment',
+      id: ENVIRONMENT_ID
     }
-   }
+  }
 
-  await space.getApiKeys()
-  .then(function(response){
-    items = response.items
-    for(item in response.items){
-      console.log(`Updating - ${response.items[item].sys.id}`);
-      response.items[item].environments.push(newEnv);
-      response.items[item].update();
-    }
-  })
-  .catch(console.error);
+  const {items: keys} = await space.getApiKeys();
+  await Promise.all(keys.map(key => {
+    console.log(`Updating - ${key.sys.id}`);
+    key.environments.push(newEnv);
+    return key.update();
+  }));
 
   // ---------------------------------------------------------------------------
-  console.log('Set default locale');
-  const environment = await space.getEnvironment(ENVIRONMENT_ID)
-    .then((environment) => {
-      return environment;
-    })
-    .catch(console.error);
+  console.log('Set default locale to new environment');
   const defaultLocale = (await environment.getLocales()).items
     .find(locale => locale.default).code;
 
