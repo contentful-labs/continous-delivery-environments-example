@@ -66,8 +66,9 @@
   .catch(console.error);
 
   // ---------------------------------------------------------------------------
-  console.log('Connect to environment');
-  environment = await space.getEnvironment(ENVIRONMENT_ID);
+  console.log('Set default locale');
+  console.log(environment)
+  // environment = await space.getEnvironment(ENVIRONMENT_ID);
   const defaultLocale = (await environment.getLocales()).items
     .find(locale => locale.default).code;
 
@@ -76,8 +77,6 @@
   const availableMigrations = (await readdirAsync(MIGRATIONS_DIR))
     .filter(file => /^\d+?\.js$/.test(file))
     .map(file => getVersionOfFile(file));
-
-  console.log(availableMigrations);
 
   // ---------------------------------------------------------------------------
   console.log('Figure out latest ran migration of the contentful space');
@@ -93,7 +92,6 @@
 
   let storedVersionEntry = versions[0];
   const currentVersionString = storedVersionEntry.fields.version[defaultLocale];
-  console.log(currentVersionString);
 
   // ---------------------------------------------------------------------------
   console.log('Evaluate which migrations to run');
