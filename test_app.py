@@ -23,14 +23,10 @@ class TestApp:
     def test_content_type_post(self, contentful_client):
         """Test content model of a post"""
         post_content_type = contentful_client.content_type("post")
-        assert len(post_content_type.fields) == 6
+        assert len(post_content_type.fields) == 5
         title = next(d for d in post_content_type.fields if d.id == "title")
         assert title.id == "title"
         assert title.type == "Symbol"
-
-        movie = next(d for d in post_content_type.fields if d.id == "movies")
-        assert movie.id == "movies"
-        assert movie.type == "Symbol"
 
         author = next(d for d in post_content_type.fields if d.id == "author")
         assert author.id == "author"
