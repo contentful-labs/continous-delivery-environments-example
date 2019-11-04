@@ -35,13 +35,14 @@
 
 
     // ---------------------------------------------------------------------------
-
+    console.log('Running with the following configuration');
     if (ENVIRONMENT_INPUT = 'master'){
       console.log(`Running on master.`);
       ENVIRONMENT_ID = "master-".concat(new Date().toISOString().substring(0, 10) +
         '-' + new Date().getUTCHours() +
         '-' + new Date().getUTCMinutes());
     }else{
+      console.log('Running on feature branch');
       ENVIRONMENT_ID = ENVIRONMENT_INPUT;
     }
     // ---------------------------------------------------------------------------
@@ -163,6 +164,22 @@
 
       console.log(`Updated version entry to ${migrationToRun}`);
     }
+
+    // ---------------------------------------------------------------------------
+    console.log('Checking if we need to update master alias');
+    if (ENVIRONMENT_INPUT = 'master'){
+      console.log(`Running on master.`);
+      console.log(`Updating master alias.`);
+      await space.getEnvironmentAlias('master'))
+        .then((alias) => {
+          alias.environment.sys.id = ENVIRONMENT_ID
+          return alias.update()
+      console.log(`Master alias updated.`);
+    }else{
+      console.log('Running on feature branch');
+      console.log('No alias changes required');
+    }
+
 
     console.log('All done!');
   } catch(e) {
