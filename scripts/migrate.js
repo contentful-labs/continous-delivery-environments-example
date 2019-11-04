@@ -174,7 +174,9 @@
         .then((alias) => {
           alias.environment.sys.id = ENVIRONMENT_ID
           return alias.update()
-        );
+        })
+        .then((alias) => console.log(`alias ${alias.sys.id} updated.`))
+        .catch(console.error);
       console.log(`Master alias updated.`);
     }else{
       console.log('Running on feature branch');
