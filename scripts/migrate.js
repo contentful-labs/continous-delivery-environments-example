@@ -170,7 +170,7 @@
     if (ENVIRONMENT_INPUT = 'master'){
       console.log(`Running on master.`);
       console.log(`Updating master alias.`);
-      await space.getEnvironmentAlias('master'))
+      await space.getEnvironmentAlias('master')
         .then((alias) => {
           alias.environment.sys.id = ENVIRONMENT_ID
           return alias.update()
