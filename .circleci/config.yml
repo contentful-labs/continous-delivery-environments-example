@@ -86,9 +86,9 @@ jobs:
             key: v1-dependencies-{{ checksum "package.json" }}
 
         - run:
-            name: Setting Master Environment Alias
+            name: Creating new master environment and setting master alias
             command: |
-              scripts/aliases.js $SPACE_ID "CI_$CIRCLE_BRANCH" $MANAGEMENT_API_KEY
+              scripts/migrate.js $SPACE_ID master $MANAGEMENT_API_KEY
 
         - run:
             name: Deploy Master to Heroku
