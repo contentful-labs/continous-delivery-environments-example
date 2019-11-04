@@ -36,7 +36,7 @@
 
     // ---------------------------------------------------------------------------
     console.log('Running with the following configuration');
-    if (ENVIRONMENT_INPUT = 'master'){
+    if (ENVIRONMENT_INPUT == 'master'){
       console.log(`Running on master.`);
       ENVIRONMENT_ID = "master-".concat(new Date().toISOString().substring(0, 10) +
         '-' + new Date().getUTCHours() +
@@ -167,7 +167,7 @@
 
     // ---------------------------------------------------------------------------
     console.log('Checking if we need to update master alias');
-    if (ENVIRONMENT_INPUT = 'master'){
+    if (ENVIRONMENT_INPUT == 'master'){
       console.log(`Running on master.`);
       console.log(`Updating master alias.`);
       await space.getEnvironmentAlias('master')
