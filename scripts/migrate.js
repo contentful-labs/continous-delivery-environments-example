@@ -38,7 +38,7 @@
     console.log('Running with the following configuration');
     if (ENVIRONMENT_INPUT == 'master'){
       console.log(`Running on master.`);
-      ENVIRONMENT_ID = "master-".concat(new Date().toISOString().substring(0, 10) +
+      ENVIRONMENT_ID = "mstr-".concat(new Date().toISOString().substring(0, 10) +
         '-' + new Date().getUTCHours() +
         '-' + new Date().getUTCMinutes());
     }else{
