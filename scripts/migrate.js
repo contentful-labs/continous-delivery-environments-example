@@ -38,9 +38,7 @@
     console.log('Running with the following configuration');
     if (ENVIRONMENT_INPUT == 'master'){
       console.log(`Running on master.`);
-      ENVIRONMENT_ID = "mstr-".concat(new Date().toISOString().substring(0, 10) +
-        '-' + new Date().getUTCHours() +
-        '-' + new Date().getUTCMinutes());
+      ENVIRONMENT_ID = "master-".concat(getStringDate());
     }else{
       console.log('Running on feature branch');
       ENVIRONMENT_ID = ENVIRONMENT_INPUT;
@@ -190,3 +188,14 @@
     process.exit(1);
   }
 })();
+
+
+
+function getStringDate(){
+  var d = new Date();
+  function pad(n){return n<10 ? '0'+n : n}
+  return d.toISOString().substring(0, 10)
+  + '-'
+  + pad(d.getUTCHours())
+  + pad(d.getUTCMinutes())
+}
