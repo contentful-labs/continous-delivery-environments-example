@@ -86,7 +86,7 @@ jobs:
             key: v1-dependencies-{{ checksum "package.json" }}
 
         - run:
-            name: Updating Master Environment
+            name: Creating new master environment and setting master alias
             command: |
               scripts/migrate.js $SPACE_ID master $MANAGEMENT_API_KEY
 
