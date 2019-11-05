@@ -1,14 +1,14 @@
 Continuous Delivery Environments Example
 =====
 
-An example application for how you can integrating content migrations in your continuous delivery pipeline.
+An example application for how you can integrating content migrations in your continuous delivery pipeline. This specfic example showcases using Contentful with CircleCI to manage content model changes. 
 
 What is this about?
 =====
 
 This example deploys a simple flask site integrated with Contentful onto Heroku utilizing CircleCi.
 
-You can read our [conceptual guide](https://www.contentful.com/developers/docs/concepts/deployment-pipeline/) on how to utilize Contentful Environments inside your continuous delivery pipeline.
+You can read our [tutorial that outlines showcases how to utilize this repository](https://www.contentful.com/developers/docs/tutorials/general/continuous-integration-with-circleci/) or our [conceptual guide](https://www.contentful.com/developers/docs/concepts/deployment-pipeline/) on how to broadly utilize Contentful Environments inside your continuous delivery pipeline.
 
 Getting started
 =====
@@ -67,6 +67,7 @@ contentful login
 * Define the following environment variables on CircleCI:
   * DELIVERY_API_KEY
   * HEROKU_API_KEY
+  * HEROKU_LOGIN
   * MANGEMENT_API_KEY
   * SPACE_ID
 * Update the HEROKU_APP variable in the config.yml file with your Heroku app name.
@@ -75,4 +76,4 @@ contentful login
 License
 =======
 
-Copyright (c) 2018 Contentful GmbH. Code released under the MIT license. See [LICENSE](LICENSE) for further details.
+Copyright (c) 2019 Contentful GmbH. Code released under the MIT license. See [LICENSE](LICENSE) for further details.
