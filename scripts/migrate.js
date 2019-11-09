@@ -31,11 +31,8 @@
     let environment;
     console.log('Running with the following configuration');
     console.log(`SPACE_ID: ${SPACE_ID}`);
-    console.log(`ENVIRONMENT_ID: ${ENVIRONMENT_ID}`);
-
 
     // ---------------------------------------------------------------------------
-    console.log('Running with the following configuration');
     if (ENVIRONMENT_INPUT == 'master'){
       console.log(`Running on master.`);
       ENVIRONMENT_ID = "master-".concat(getStringDate());
@@ -43,6 +40,8 @@
       console.log('Running on feature branch');
       ENVIRONMENT_ID = ENVIRONMENT_INPUT;
     }
+    console.log(`ENVIRONMENT_ID: ${ENVIRONMENT_ID}`);
+
     // ---------------------------------------------------------------------------
 
     console.log(`Checking for existing versions of environment: ${ENVIRONMENT_ID}`);
@@ -180,7 +179,6 @@
       console.log('Running on feature branch');
       console.log('No alias changes required');
     }
-
 
     console.log('All done!');
   } catch(e) {
