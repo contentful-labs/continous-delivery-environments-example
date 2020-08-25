@@ -1,5 +1,8 @@
 module.exports = function runMigration(migration) {
-  const post = migration.editContentType("post");
-  post.deleteField("last_appearance");
+  const procedure = migration.editContentType("procedure");
+  procedure
+    .createField("browserPageTitle")
+    .name("Browser Page Title")
+    .type("Symbol");
   return;
 };
