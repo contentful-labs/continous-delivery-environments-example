@@ -64,7 +64,7 @@ jobs:
         - image: circleci/python:3.6.5-node-browsers
       environment:
         # Update HEROKU_APP with your application Name.
-        HEROKU_APP_NAME: "migration-env-demo"
+        HEROKU_APP_NAME: "migration-env-demo-1"
       steps:
         - checkout
 
