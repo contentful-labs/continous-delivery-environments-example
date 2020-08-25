@@ -13,8 +13,8 @@ class TestApp:
         assert res.json == {"ping": "pong"}
 
     def test_content_type_post(self, contentful_client):
-        """Test content model of a post"""
-        post_content_type = contentful_client.content_type("post")
+        """Test content model of a procedure"""
+        post_content_type = contentful_client.content_type("Procedure")
         title = next(d for d in post_content_type.fields if d.id == "title")
         assert title.id == "title"
         assert title.type == "Symbol"
