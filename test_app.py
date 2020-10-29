@@ -5,7 +5,6 @@ from flask import url_for
 
 
 class TestApp:
-
     def test_ping(self, client):
         """Test server responds"""
         res = client.get(url_for("ping"))

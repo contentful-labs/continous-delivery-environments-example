@@ -8,7 +8,6 @@ import contentful
 def create_contentful(SPACE_ID, DELIVERY_API_KEY, environment_id="master"):
     """Connect to contentful"""
     CLIENT = contentful.Client(SPACE_ID, DELIVERY_API_KEY, environment=environment_id)
-
     return CLIENT
 
 
