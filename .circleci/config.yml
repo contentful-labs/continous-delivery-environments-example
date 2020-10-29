@@ -85,21 +85,19 @@ jobs:
                   key: v1-dependencies-{{ checksum "package.json" }}
 
             - run:
-                  name: Creating new master environment and setting master alias
+                  name: Creating new environment and setting alias
                   command: |
-                      scripts/migrate.js $SPACE_ID master $MANAGEMENT_API_KEY
+                      scripts/migrate.js $SPACE_ID $CIRCLE_BRANCH $MANAGEMENT_API_KEY
 
             - run:
                   name: setup Heroku
                   command: bash .circleci/setup-heroku.sh
 
             - deploy:
-                  name: Deploy Master to Heroku
+                  name: Deploying to Heroku
                   command: |
-                      if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                        git push heroku master
-                        heroku run python manage.py deploy
-                        heroku restart
+                      if [ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "staging" || "${CIRCLE_BRANCH}" == "qa"]; then
+                        git push heroku ${CIRCLE_BRANCH}
                       fi
 
 workflows:
@@ -112,4 +110,7 @@ workflows:
                       - build
                   filters:
                       branches:
-                          only: master
+                          only:
+                              - master
+                              - staging
+                              - qa
