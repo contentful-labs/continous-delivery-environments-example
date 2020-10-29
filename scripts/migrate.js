@@ -174,7 +174,7 @@
 
         // ---------------------------------------------------------------------------
         console.log("Checking if we need to update master alias");
-        if (ENVIRONMENT_INPUT == "master" || "staging" || "qa") {
+        if (ENVIRONMENT_INPUT == "master" || ENVIRONMENT_INPUT == "staging" || ENVIRONMENT_INPUT == "qa") {
             console.log(`Running on ${ENVIRONMENT_INPUT}.`);
             console.log(`Updating ${ENVIRONMENT_INPUT} alias.`);
             await space
