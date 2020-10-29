@@ -33,7 +33,7 @@
         // ---------------------------------------------------------------------------
         if (ENVIRONMENT_INPUT == "master" || ENVIRONMENT_INPUT == "staging" || ENVIRONMENT_INPUT == "qa") {
             console.log(`Running on ${ENVIRONMENT_INPUT}.`);
-            ENVIRONMENT_ID = "${ENVIRONMENT_INPUT}-".concat(getStringDate());
+            ENVIRONMENT_ID = `${ENVIRONMENT_INPUT}-`.concat(getStringDate());
         } else {
             console.log("Running on feature branch");
             ENVIRONMENT_ID = ENVIRONMENT_INPUT;
