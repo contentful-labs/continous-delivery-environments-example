@@ -96,8 +96,8 @@ jobs:
             - deploy:
                   name: Deploying to Heroku
                   command: |
-                      if [ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "staging" || "${CIRCLE_BRANCH}" == "qa"]; then
-                        git push heroku ${CIRCLE_BRANCH}
+                      if [ "$CIRCLE_BRANCH" == "master" ] || [ "$CIRCLE_BRANCH" == "staging" ] || [ "$CIRCLE_BRANCH" == "qa"]; then
+                        git push heroku $CIRCLE_BRANCH
                       fi
 
 workflows:
