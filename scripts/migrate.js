@@ -31,9 +31,9 @@
         console.log(`SPACE_ID: ${SPACE_ID}`);
 
         // ---------------------------------------------------------------------------
-        if (ENVIRONMENT_INPUT == "master") {
-            console.log(`Running on master.`);
-            ENVIRONMENT_ID = "master-".concat(getStringDate());
+        if (ENVIRONMENT_INPUT == "master" || ENVIRONMENT_INPUT == "staging" || ENVIRONMENT_INPUT == "qa") {
+            console.log(`Running on ${ENVIRONMENT_INPUT}.`);
+            ENVIRONMENT_ID = "${ENVIRONMENT_INPUT}-".concat(getStringDate());
         } else {
             console.log("Running on feature branch");
             ENVIRONMENT_ID = ENVIRONMENT_INPUT;
@@ -46,7 +46,7 @@
 
         try {
             environment = await space.getEnvironment(ENVIRONMENT_ID);
-            if (ENVIRONMENT_ID != "master") {
+            if (ENVIRONMENT_ID != "master" || ENVIRONMENT_INPUT != "staging" || ENVIRONMENT_INPUT != "qa") {
                 await environment.delete();
                 console.log("Environment deleted");
             }
@@ -55,7 +55,7 @@
         }
 
         // ---------------------------------------------------------------------------
-        if (ENVIRONMENT_ID != "master") {
+        if (ENVIRONMENT_ID != "master" || ENVIRONMENT_INPUT != "staging" || ENVIRONMENT_INPUT != "qa") {
             console.log(`Creating environment ${ENVIRONMENT_ID}`);
             environment = await space.createEnvironmentWithId(ENVIRONMENT_ID, {
                 name: ENVIRONMENT_ID,
@@ -173,7 +173,7 @@
         }
 
         // ---------------------------------------------------------------------------
-        console.log("Checking if we need to update master alias");
+        console.log("Checking if we need to an alias");
         if (ENVIRONMENT_INPUT == "master" || ENVIRONMENT_INPUT == "staging" || ENVIRONMENT_INPUT == "qa") {
             console.log(`Running on ${ENVIRONMENT_INPUT}.`);
             console.log(`Updating ${ENVIRONMENT_INPUT} alias.`);
