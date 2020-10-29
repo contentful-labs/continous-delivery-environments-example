@@ -174,18 +174,18 @@
 
         // ---------------------------------------------------------------------------
         console.log("Checking if we need to update master alias");
-        if (ENVIRONMENT_INPUT == "master") {
-            console.log(`Running on master.`);
-            console.log(`Updating master alias.`);
+        if (ENVIRONMENT_INPUT == "master" || ENVIRONMENT_INPUT == "staging" || ENVIRONMENT_INPUT == "qa") {
+            console.log(`Running on ${ENVIRONMENT_INPUT}.`);
+            console.log(`Updating ${ENVIRONMENT_INPUT} alias.`);
             await space
-                .getEnvironmentAlias("master")
+                .getEnvironmentAlias(ENVIRONMENT_INPUT)
                 .then((alias) => {
                     alias.environment.sys.id = ENVIRONMENT_ID;
                     return alias.update();
                 })
                 .then((alias) => console.log(`alias ${alias.sys.id} updated.`))
                 .catch(console.error);
-            console.log(`Master alias updated.`);
+            console.log(`${ENVIRONMENT_INPUT} alias updated.`);
         } else {
             console.log("Running on feature branch");
             console.log("No alias changes required");
