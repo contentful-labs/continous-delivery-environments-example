@@ -6,5 +6,4 @@ module.exports = function runMigration(migration) {
     .type("Symbol")
     .required(false);
   return;
-  //Hi Again
 };
