@@ -8,7 +8,7 @@ What is this about?
 
 This example deploys a simple flask site integrated with Contentful onto Heroku utilizing CircleCi.
 
-You can read our [tutorial that outlines showcases how to utilize this repository](https://www.contentful.com/developers/docs/tutorials/general/continuous-integration-with-circleci/) or our [conceptual guide](https://www.contentful.com/developers/docs/concepts/deployment-pipeline/) on how to broadly utilize Contentful Environments inside your continuous delivery pipeline.
+You can read our [tutorial that outlines showcases how to utilize this repository](https://www.contentful.com/developers/docs/tutorials/general/continuous-integration-with-circleci/), our [conceptual guide](https://www.contentful.com/developers/docs/concepts/deployment-pipeline/) on how to broadly utilize Contentful Environments inside your continuous delivery pipeline, or checkout our GitHub Action example that takes advantage of [GitHub Actions](https://github.com/contentful-labs/contentful-action-example) rather than CircleCI.
 
 Getting started
 =====
